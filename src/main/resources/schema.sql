@@ -1,0 +1,32 @@
+CREATE TABLE IF NOT EXISTS quiz(
+    quiz_id BIGINT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    user_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY  (quiz_id)
+);
+
+CREATE TABLE IF NOT EXISTS question(
+    question_id BIGINT NOT NULL AUTO_INCREMENT,
+    quiz_id BIGINT NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    question_type VARCHAR(50) NOT NULL,
+    PRIMARY KEY  (question_id),
+    FOREIGN KEY (quiz_id) REFERENCES quiz(quiz_id)
+);
+
+CREATE TABLE IF NOT EXISTS options(
+    options_id BIGINT NOT NULL AUTO_INCREMENT,
+    question_id  BIGINT NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    is_correct BOOLEAN NOT NULL,
+    PRIMARY KEY  (options_id),
+    FOREIGN KEY (question_id) REFERENCES question(question_id)
+);
+
+CREATE TABLE IF NOT EXISTS permalink(
+    id VARCHAR(10) NOT NULL,
+    short_url  VARCHAR(10) NOT NULL,
+    long_url VARCHAR(2000) NOT NULL,
+    PRIMARY KEY  (id)
+);
+
